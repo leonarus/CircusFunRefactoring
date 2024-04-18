@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,7 +6,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SceneManager _sceneManager;
     [SerializeField] private GameSoundManager _gameSoundManager;
     
-    private bool _isJumping;
     private bool _canJump;
     
     private IInputHandler _inputHandler;
@@ -34,7 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_inputHandler.CanJump() && _collisionHandler.IsGrounded() && !_collisionHandler.IsDead() && _canJump)
         {
-            _isJumping = true;
             _gameSoundManager.PlayJumpSound();
             _animationHandler.StartJump();
             _rigidbody.AddForce(new Vector2(0.0f, 150.0f));
@@ -43,7 +40,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animationHandler.StopJump();
-            _isJumping = false;
         }
     }
 
